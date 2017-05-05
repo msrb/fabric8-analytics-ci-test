@@ -4,9 +4,10 @@ node("docker") {
     }
 
     stage('dump env') {
-        sh 'env > env.txt'
-        readFile('env.txt').split("\r?\n").each {
-            println it
+        @NonCPS
+        def printParams() {
+          env.getEnvironment().each { name, value -> println "Name: $name -> Value $value" }
         }
+        printParams()
     }
 }
