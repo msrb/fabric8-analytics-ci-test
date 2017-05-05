@@ -4,6 +4,6 @@ node("docker") {
     }
 
     stage('dump env') {
-        print(env)
+        env.each { name, value -> println "Name: $name -> Value $value" }
     }
 }
