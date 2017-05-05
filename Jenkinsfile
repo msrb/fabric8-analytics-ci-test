@@ -4,6 +4,9 @@ node("docker") {
     }
 
     stage('dump env') {
-        env.each { name, value -> println "Name: $name -> Value $value" }
+        sh 'env > env.txt'
+        readFile('env.txt').split("\r?\n").each {
+            println it
+        }
     }
 }
